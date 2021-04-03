@@ -12,6 +12,7 @@ int main(int argc, char** argv) {
 	float fireballRadius = (argc > 1) ? std::atof(argv[1]) : 2;
 	float fireLifetime = (argc > 2) && std::atof(argv[2]) > 4 ? std::atof(argv[2]) : 4;
 	const float ZOOM = (argc > 3) ? std::atof(argv[3]) : 4;
+	float hue = (argc > 4) ? std::atof(argv[4]) : 12;
 	
 	bool animate = false;
 	
@@ -40,7 +41,7 @@ int main(int argc, char** argv) {
 	RGBA palette256[256]{};
 	for (int i = 0; i < 256; i++) {
 		HSL p;
-		p.setH(12 + i/5.3f);
+		p.setH(hue + i/5.3f);
 		p.setS(1);
 		p.setL(i/240.f);
 		
@@ -49,7 +50,7 @@ int main(int argc, char** argv) {
 	RGBA palette16[16]{};
 	for (int i = 0; i < 16; i++) {
 		HSL p;
-		p.setH(12 + i*3);
+		p.setH(hue + i*3);
 		p.setS(1);
 		p.setL(i/16.f);
 		
@@ -227,7 +228,7 @@ int main(int argc, char** argv) {
 					(getFire(x, y+1) + 
 					getFire(x+1, y+1) + 
 					getFire(x-1, y+1) + 
-					getFire(x, y+2)) / 5.0f);
+					getFire(x, y+2)) / fireLifetime);
 			}
 		}
 		
