@@ -9,7 +9,12 @@ using namespace Cidr;
 int main(int argc, char** argv) {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
-	const float ZOOM = (argc > 1) ? std::atoi(argv[1]) : 6;
+	float fireballRadius = (argc > 1) ? std::atof(argv[1]) : 2;
+	float fireLifetime = (argc > 2) && std::atof(argv[2]) > 4 ? std::atof(argv[2]) : 4;
+	const float ZOOM = (argc > 3) ? std::atof(argv[3]) : 4;
+	
+	bool animate = false;
+	
 
 	const int CANVAS_WIDTH = 800/ZOOM;
 	const int CANVAS_HEIGHT = 600/ZOOM;
@@ -110,9 +115,6 @@ int main(int argc, char** argv) {
 		}
 		return palette[closest];
 	};
-	
-	int fireballRadius = 2;
-	bool animate = false;
 	
 	SDL_Event e;
 	bool alive = true;
